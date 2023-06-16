@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+ 
+
+  <style>
+    table,
+    th,
+    td {
+
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+
+  <span>Dashboard</span> <br>
+  <a href="/">Back to Home</a>
+  <div>
+    <h1>Add Products </h1>
+    <form action="/admin" method="post">
+      <input type="text" name="productName" placeholder="Product Name" required>
+      <input type="number" name="productQty" placeholder="Product Qty" required>
+      <input type="number" name="productPrice" placeholder="Product Price" required>
+      <button type="submit" name="productAdd">Add Product</button>
+    </form>
+  </div>
+
+  <div class="div">
+    <span> <h3>Current Products List</h3>  </span>
+    <table>
+      <tr>
+        <th>S no.</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price(in ₹)</th>
+        <th>Action</th>
+      </tr>
+      <% products.map((e,index)=>{ %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%= e.productName %></td>
+        <td><%= e.productQty %></td>
+        <td><%= e.productPrice %></td>
+        <td>
+          <form action="/admin/delete" method="post">        <!-- making other router & form to  -->  
+            <input type="hidden" name="productId" value="<%= e._id %>">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+       
+
+        <% }) %>
+      </tr>
+    </table>
+ 
+
+     
+  </div>
+
+  <div name="customerQuery">
+    <h2>Customer Query</h2>
+    <table style="width: 70%;">
+      <tr>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>E-mail</th>
+        <th>Comment</th>
+        <!-- <th>Follow up</th> -->
+      </tr>
+      <% items.map((item)=>{ %>
+        <tr>
+
+          <td>
+            <%= item.name %>
+          </td>
+          <td>
+            <%= item.contact %>
+          </td>
+          <td>
+            <%= item.email %>
+          </td>
+          <td>
+            <%= item.comment %>
+
+              <% })%>
+        </tr>
+
+  </div>
+
+
+
+  <script src="../app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>
